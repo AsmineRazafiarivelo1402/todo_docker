@@ -4,6 +4,8 @@ import lombok.*;
 
 
 import java.time.Instant;
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -12,7 +14,7 @@ import java.time.Instant;
 @ToString
 @Builder
 public class TodoRequest {
-    private String id;
+    private UUID id;
     private String title;
     private String description;
     private Boolean completed = false;
