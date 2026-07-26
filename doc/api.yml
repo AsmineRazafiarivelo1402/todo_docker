@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: SAMPLE API FOR TODO APP
+  description: All description for every endpoint
+servers:
+  - url: http://localhost:8080
+paths:
+  /todo:
+    post:
+      summary: Create Todo
+      description: Method to create todo , can create todo, only with title and description
+      operationId: create
+      tags:
+        - Todo
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoRequest'
+      responses:
+        '201':
+          description: Created succesfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoResponse'
+        '401':
+          description: Invalid request(title null)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalHandlerException'
+components:
+  schemas:
+    TodoRequest:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          example: "Apprendre Spring Boot"
+        description:
+          type: string
+          example: "Terminer le chapitre sur les migrations"
+        completed:
+          type: boolean
+          example: false
+
+    TodoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        completed:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+
+    GlobalExceptionHandler:
+      type: object
+      description: request failed
+      additionalProperties:
+        type: string
+
